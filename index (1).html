@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>التقديم على السيرفر</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Silkscreen&display=swap">
+<style>
+:root{color-scheme:dark;--bg:rgb(8,18,13);--pn:rgb(14,30,22);--pn2:rgb(20,40,29);--ac:rgb(141,240,90);--wd:rgb(205,150,90);--tx:rgb(230,241,233);--mut:rgb(142,168,150);--bd:rgb(48,82,58);--sky:rgb(40,90,110);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7;min-height:100vh;
+background:radial-gradient(ellipse 80% 40% at 50% 0,rgba(141,240,90,.18),transparent 70%),linear-gradient(180deg,rgba(40,90,110,.35),transparent 220px),
+linear-gradient(rgba(141,240,90,.05) 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,rgba(141,240,90,.05) 1px,transparent 1px) 0 0/30px 30px,var(--bg)}
+.wrap{max-width:640px;margin:0 auto;padding:16px 16px 56px}
+.zip{height:12px;background:repeating-linear-gradient(90deg,var(--ac) 0 12px,rgb(90,160,60) 12px 24px);border-bottom:3px solid #000;margin:0 -16px}
+header{text-align:center;padding:20px 0 8px;animation:in .55s both}
+.tree{width:96px;height:auto;image-rendering:pixelated;animation:fl 4s ease-in-out infinite}
+h1,h2{font-family:Cairo,sans-serif;font-weight:900}
+h1{margin:6px 0 2px;font-size:30px;color:var(--ac);text-shadow:3px 3px 0 #000}
+h2{font-size:19px;margin:0 0 6px;color:var(--wd)}
+header p{color:var(--mut);margin:0}
+.tag{display:inline-block;font-family:Silkscreen,monospace;font-size:11px;color:var(--ac);border:2px solid var(--bd);padding:1px 8px;border-radius:4px;margin-top:8px;background:var(--pn)}
+.tag i{display:inline-block;width:8px;height:8px;background:var(--ac);margin-left:6px;animation:pl 1.6s infinite}
+.card{background:var(--pn);border:3px solid var(--bd);border-radius:4px;padding:18px;margin-top:18px;
+box-shadow:inset 0 3px 0 rgba(255,255,255,.07),inset 0 -3px 0 rgba(0,0,0,.35),5px 5px 0 #000;animation:in .55s both}
+label{display:block;font-weight:700;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:10px 12px;border:3px solid var(--bd);border-radius:4px;background:rgb(6,14,10);color:var(--tx);font:inherit}
+textarea{min-height:100px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ac)}
+button{margin-top:18px;width:100%;padding:12px;border:3px solid #000;border-radius:4px;background:var(--ac);color:rgb(8,18,13);font-family:Cairo,sans-serif;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 5px 0 rgb(70,140,40);transition:transform .08s,box-shadow .08s}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 rgb(70,140,40)}
+.msg{margin-top:14px;padding:12px;border:3px solid #000;border-radius:4px;display:none;font-weight:500}
+.ok{background:rgb(30,70,30);color:var(--ac);display:block}
+.err{background:rgb(80,25,25);color:rgb(255,150,150);display:block}
+.rules{padding-right:20px;margin:0}.rules li{margin:4px 0}
+.copy{display:none}
+.copy textarea{min-height:140px;font-size:14px}
+.hp{position:absolute;left:-9999px}
+.pill{display:inline-block;font-family:Silkscreen,monospace;font-size:11px;padding:1px 8px;border:2px solid #000;border-radius:4px;color:#000}
+.p-pending{background:rgb(240,200,70)}.p-ok{background:var(--ac)}.p-no{background:rgb(240,100,100)}
+.app{background:rgb(6,14,10);border:3px solid var(--bd);border-top:8px solid rgb(240,200,70);border-radius:4px;padding:12px;margin-top:12px;font-size:14px;overflow-wrap:anywhere}
+.app.ok{border-top-color:var(--ac)}.app.no{border-top-color:rgb(240,100,100)}
+.app b{color:var(--wd)}
+.row{display:flex;gap:8px;margin-top:10px}.row button{margin:0;padding:8px;font-size:14px;box-shadow:0 3px 0 rgba(0,0,0,.5)}
+.b-no{background:rgb(240,100,100)}.b-rs{background:var(--pn2);color:var(--tx)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fl{50%{transform:translateY(-6px)}}
+@keyframes pl{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="zip"></div>
+<div class="wrap">
+<header>
+<svg class="tree" viewBox="0 0 12 14" shape-rendering="crispEdges" aria-hidden="true"><g fill="#2f7d1f"><rect x="3" y="0" width="6" height="1"/><rect x="1" y="1" width="10" height="3"/><rect x="0" y="4" width="12" height="3"/><rect x="2" y="7" width="8" height="2"/></g><g fill="#8df05a"><rect x="4" y="1" width="2" height="1"/><rect x="2" y="4" width="2" height="1"/><rect x="7" y="5" width="2" height="1"/></g><rect x="5" y="9" width="2" height="5" fill="#cd965a"/><rect x="5" y="9" width="1" height="5" fill="#9a6a3a"/></svg>
+<h1>انضم لسيرفرنا</h1>
+<p>املأ الاستمارة وهنراجع طلبك في أقرب وقت</p><span class="tag"><i></i>APPLICATIONS OPEN</span>
+</header>
+
+<div class="card">
+<h2>قوانين السيرفر</h2>
+<ul class="rules">
+<li>ممنوع الهاك والغش بكل أنواعه.</li>
+<li>احترام باقي اللاعبين وعدم السب.</li>
+<li>ممنوع تخريب بيوت الغير أو سرقتها.</li>
+</ul>
+</div>
+
+<form id="f" class="card" onsubmit="return false">
+<h2>استمارة التقديم</h2>
+<label for="mc">اسم اللاعب في ماينكرافت *</label>
+<input id="mc" maxlength="32" autocomplete="off" required>
+
+<label for="ed">النسخة *</label>
+<select id="ed"><option>Java</option><option>Bedrock (موبايل / ويندوز / كونسول)</option></select>
+
+<label for="age">السن *</label>
+<input id="age" type="number" min="5" max="99" required>
+
+<label for="dc">يوزر ديسكورد (اختياري)</label>
+<input id="dc" maxlength="40" autocomplete="off">
+
+<label for="exp">بتلعب ماينكرافت بقالك قد إيه؟</label>
+<select id="exp"><option>أقل من سنة</option><option>من سنة لـ 3 سنين</option><option>أكتر من 3 سنين</option></select>
+
+<label for="why">ليه عايز تنضم للسيرفر؟ *</label>
+<textarea id="why" maxlength="800" required></textarea>
+
+<label><input id="rl" type="checkbox" style="width:auto;margin-left:8px"> قرأت القوانين وموافق عليها *</label>
+
+<input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button id="go" type="button">تجهيز الطلب</button>
+<div id="m" class="msg"></div>
+
+<div id="copy" class="copy">
+<p>تمام! ابعت النص ده لصاحب السيرفر على ديسكورد أو إيميل:</p><button id="cp" type="button">نسخ النص</button><div id="links" style="margin-top:12px"></div>
+<textarea id="ct" readonly></textarea>
+</div>
+</form>
+
+
+</div>
+
+<script>
+(function(){
+var DISCORD_URL="";   // حط هنا لينك دعوة ديسكورد بتاعك
+var EMAIL="";         // أو إيميلك لاستقبال الطلبات
+var $=function(i){return document.getElementById(i)};
+var db=null,uid=null,owner=false,decisions={};
+var LBL={pending:'قيد المراجعة',ok:'مقبول ✅',no:'مرفوض'},CLS={pending:'p-pending',ok:'p-ok',no:'p-no'};
+function show(t,c){var m=$('m');m.className='msg '+c;m.textContent=t}
+function val(){
+  var d={mc:$('mc').value.trim(),edition:$('ed').value,age:parseInt($('age').value,10),
+    discord:$('dc').value.trim(),exp:$('exp').value,why:$('why').value.trim()};
+  if(!d.mc||!d.why||!d.age){show('من فضلك املأ كل الخانات المطلوبة.','err');return null}
+  if(d.age<5||d.age>99){show('السن غير صحيح.','err');return null}
+  if(!$('rl').checked){show('لازم توافق على القوانين الأول.','err');return null}
+  return d;
+}
+function asText(d){
+  return 'طلب انضمام\nالاسم: '+d.mc+'\nالنسخة: '+d.edition+'\nالسن: '+d.age+'\nديسكورد: '+(d.discord||'-')+'\nالخبرة: '+d.exp+'\nالسبب: '+d.why;
+}
+function fallback(d){
+  var t=asText(d);
+  $('ct').value=t;$('copy').style.display='block';
+  var L=$('links');L.textContent='';
+  function link(txt,href){var a=document.createElement('a');a.textContent=txt;a.href=href;a.target='_blank';a.rel='noopener';a.style.cssText='display:block;margin:6px 0;color:var(--ac)';L.appendChild(a)}
+  if(DISCORD_URL)link('افتح سيرفر ديسكورد',DISCORD_URL);
+  if(EMAIL)link('ابعت بالإيميل','mailto:'+EMAIL+'?subject='+encodeURIComponent('طلب انضمام - '+d.mc)+'&body='+encodeURIComponent(t));
+}
+$('go').addEventListener('click',async function(){
+  if($('hp').value)return;
+  var d=val();if(!d)return;
+  var b=$('go');b.disabled=true;
+  if(db&&uid){
+    try{
+      d.at=Date.now();
+      await db.collection('applications').doc(uid).set(d);
+      show('تم إرسال طلبك ✅ هتلاقي حالته تحت.','ok');
+      $('f').querySelectorAll('input,select,textarea').forEach(function(e){e.disabled=true});
+      return;
+    }catch(e){}
+  }
+  b.disabled=false;
+  show('مقدرناش نسجل الطلب أوتوماتيك. انسخه وابعته بإيدك.','err');
+  fallback(d);
+});
+$('cp').addEventListener('click',function(){
+  var ta=$('ct');ta.select();
+  try{(navigator.clipboard?navigator.clipboard.writeText(ta.value):Promise.reject()).then(function(){$('cp').textContent='تم النسخ ✔'}).catch(function(){document.execCommand('copy');$('cp').textContent='تم النسخ ✔'})}catch(e){document.execCommand('copy');$('cp').textContent='تم النسخ ✔'}
+});
+function setStatus(id,st){
+  return db.collection('decisions').doc(id).set({status:st,at:Date.now()}).catch(function(){alert('تعذر حفظ القرار')});
+}
+var lastApps=[];
+function render(){
+  var box=$('list');box.textContent='';
+  $('cnt').textContent=lastApps.length;
+  if(!lastApps.length){box.textContent='لسه مفيش طلبات.';return}
+  lastApps.slice().sort(function(a,b){return (b.d.at||0)-(a.d.at||0)}).forEach(function(x){
+    var d=x.d,st=(decisions[x.id]&&decisions[x.id].status)||'pending';
+    var el=document.createElement('div');el.className='app'+(st==='ok'?' ok':st==='no'?' no':'');
+    function row(k,v){var p=document.createElement('div');var s=document.createElement('b');s.textContent=k+': ';p.appendChild(s);p.appendChild(document.createTextNode(String(v==null?'-':v)));el.appendChild(p)}
+    var h=document.createElement('div');var pl=document.createElement('span');pl.className='pill '+CLS[st];pl.textContent=LBL[st];h.appendChild(pl);el.appendChild(h);
+    row('الاسم',d.mc);row('النسخة',d.edition);row('السن',d.age);row('ديسكورد',d.discord||'-');row('الخبرة',d.exp);row('السبب',d.why);
+    if(d.at)row('الوقت',new Date(d.at).toLocaleString('ar-EG'));
+    var r=document.createElement('div');r.className='row';
+    function btn(txt,cls,fn){var b=document.createElement('button');b.type='button';b.textContent=txt;if(cls)b.className=cls;b.addEventListener('click',fn);r.appendChild(b)}
+    btn('قبول','',function(){setStatus(x.id,'ok')});
+    btn('رفض','b-no',function(){setStatus(x.id,'no')});
+    btn('إعادة','b-rs',function(){setStatus(x.id,'pending')});
+    btn('حذف','b-rs',function(){if(confirm('حذف الطلب نهائيًا؟')){db.collection('applications').doc(x.id).delete();db.collection('decisions').doc(x.id).delete()}});
+    el.appendChild(r);box.appendChild(el);
+  });
+}
+})();
+</script>
+</body>
+</html>
